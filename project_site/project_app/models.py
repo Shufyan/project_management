@@ -10,7 +10,7 @@ from datetime import date
 
 # Create your models here.
 class Project(models.Model):
-    id = models.IntegerField(primary_key=True, editable=False, unique=True, default=generate_project_id())
+    id = models.IntegerField(primary_key=True, editable=False, verbose_name="ID")
     name = models.CharField(blank=False, null=False, max_length=80, validators=[RegexValidator(regex="^(?=.*[a-zA-Z])(?=.*[0-9])[A-Za-z0-9]+$", message="Project name should contain only alphanumeric characters."),
                             MinLengthValidator(10, message="The project name must be of more than 10 characters."),
                             MaxLengthValidator(80, message="The project name must be of less than 80 characters.")])
@@ -19,6 +19,11 @@ class Project(models.Model):
                             MaxLengthValidator(300, message="The project description must be of less than 300 characters.")])
     start_date = models.DateField(blank=False, null= False, default=now)
 
+    def save(self, *args, **kwargs):
+        if self._state.adding is True:
+            self.id = generate_project_id() 
+        super(Project, self).save(*args, **kwargs)
+
     def __str__(self):
         return str(self.id)
 
@@ -26,10 +31,15 @@ class Project(models.Model):
         return reverse('project_app:project_detail', kwargs={'id': self.id})
 
 class Employee(models.Model):
-    id = models.CharField(primary_key=True, editable=False, max_length=6, unique=True, default=generate_employee_id(6))
+    id = models.CharField(primary_key=True, editable=False, max_length=6, verbose_name="ID")
     fullname = models.CharField(blank=False, null=False, max_length=50, validators=[RegexValidator(regex="^[a-zA-Z ]+$", message="Employee name should contain only alphabets."),
                             MinLengthValidator(3, message="The employee name must be of more than 3 characters."),
                             MaxLengthValidator(50, message="The employee name must be of less than 80 characters.")])
+
+    def save(self, *args, **kwargs): 
+        if self._state.adding is True:
+            self.id = generate_employee_id(6) 
+        super(Employee, self).save(*args, **kwargs) 
 
     def __str__(self):
         return str(self.id)
