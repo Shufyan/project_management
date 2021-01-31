@@ -12,8 +12,8 @@ class EmployeeAdmin(admin.ModelAdmin):
     list_display = ('id', 'fullname')
 
 class Project_EmployeeAdmin(admin.ModelAdmin):
-    fields = ['project_id', 'employee_id']
-    list_display = ('id', 'project_id', 'employee_id')
+    fields = ['project', 'employee']
+    list_display = ('id', 'project', 'employee')
 
 admin.site.register(Project, ProjectAdmin)
 admin.site.register(Employee, EmployeeAdmin)

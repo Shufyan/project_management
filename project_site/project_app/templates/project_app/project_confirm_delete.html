@@ -1,4 +1,6 @@
+{% extends "project_app/project_app_base.html" %}
 {% block content %}
+<div class="py-2"></div>
   <form method="POST">
       {% csrf_token %}
       <p>Are you sure you want to delete project {{ object }}</p>

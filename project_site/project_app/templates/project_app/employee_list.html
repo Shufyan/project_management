@@ -1,4 +1,43 @@
-<h1>Employee List</h1>
-{% for employee in employees %}
-    {{ employee }}</br>
-{% endfor %}
+{% extends "project_app/project_app_base.html" %}
+{% block content %}
+<div class="py-2"></div>
+<div class="container">
+    <a class="btn btn-md btn-primary" type="button" href="{% url 'project_app:employee_create' %}">New Employee</a>
+    <div class='row'>
+        <div class='col'>
+            <!-- Card -->
+            <div class="card">
+                <div class="card-header bg-primary text-white py-1">
+                    <h4 class="font-weight-bold">Employee List:</h4>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table id="id_dataTable" class="table table-sm table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Employee ID</th>
+                                    <th>Full Name</th>
+                                </tr>
+                            </thead>                        
+                          <tbody>                                                 
+                            {% for employee in employees %}
+                              <tr>
+                                <td><a class="text-primary" href="{% url 'project_app:employee_detail' pk=employee.pk%}">{{ employee.id }}</a></td> 
+                                <td>{{ employee.fullname }}</td>
+                              </tr>
+                            {% endfor %}                                                    
+                          </tbody>
+                        </table>
+                      </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready( function () {
+    $('#id_dataTable').DataTable();
+} );
+</script>
+{% endblock %}

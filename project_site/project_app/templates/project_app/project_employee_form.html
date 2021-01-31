@@ -1,0 +1,51 @@
+{% extends "project_app/project_app_base.html" %}
+{% block content %}
+<div class="py-2"></div>
+<div class="container">
+    <form action="" method="post" class="md-form px-5 grey-text">
+        {% csrf_token %}
+        {{ form.as_table }}    
+        <input class="btn btn-sm btn-success" type="submit" value="Submit">
+    </form>
+    <div class='row'>
+        <div class='col'>
+            <!-- Card -->
+            <div class="card">
+                <div class="card-header bg-primary text-white py-1">
+                    <h4 class="font-weight-bold">Project Assignment List:</h4>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table id="id_dataTable" class="table table-sm table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Project</th>
+                                    <th>Employee</th>
+                                    <th></th>
+                                </tr>
+                            </thead>                        
+                            <tbody>                                                 
+                            {% for assignment in assignments %}
+                                <tr>                                
+                                <td>{{ assignment.id }}</td>
+                                <td>{{ assignment.project }}</td>
+                                <td>{{ assignment.employee }}</td>
+                                <td><a class="btn btn-sm btn-danger" href="{% url 'project_app:project_employee_delete' pk=assignment.pk %}">Delete</a></td>
+                                </tr>
+                            {% endfor %}                                                    
+                            </tbody>
+                        </table>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    
+<script>
+    $(document).ready( function () {
+    $('#id_dataTable').DataTable();
+} );
+</script>
+{% endblock %}

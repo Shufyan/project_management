@@ -1,4 +1,5 @@
 from django.core import validators
+from django.core.exceptions import NON_FIELD_ERRORS
 from django.db import models
 from django.utils.timezone import now
 from django.core.validators import (RegexValidator, MinLengthValidator, MaxLengthValidator)
@@ -25,7 +26,7 @@ class Project(models.Model):
         super(Project, self).save(*args, **kwargs)
 
     def __str__(self):
-        return str(self.id)
+        return f'{self.id} - {self.name}'
 
     def get_absolute_url(self):
         return reverse('project_app:project_detail', kwargs={'id': self.id})
@@ -42,15 +43,27 @@ class Employee(models.Model):
         super(Employee, self).save(*args, **kwargs) 
 
     def __str__(self):
-        return str(self.id)
+        return f'{self.id} - {self.fullname}'
 
     def get_absolute_url(self):
         return reverse('project_app:employee_detail', kwargs={'id': self.id})
 
 class Project_Employee(models.Model):
-    project_id = models.ForeignKey(Project, related_name='projects', on_delete=models.CASCADE)
-    employee_id = models.ForeignKey(Employee, related_name='employees', on_delete=models.CASCADE)
+    project = models.ForeignKey(Project, related_name='projects', on_delete=models.CASCADE)
+    employee = models.ForeignKey(Employee, related_name='employees', on_delete=models.CASCADE)
 
+    class Meta:
+        constraints = [models.UniqueConstraint(fields=['project','employee'], name='unique_project_employee')]
+
+    def unique_error_message(self, model_class, unique_check):
+        if model_class == type(self) and unique_check == ('project', 'employee'):
+            return 'This employee is already assigned to this project. Please choose other.'
+        else:
+            return super(Project_Employee, self).unique_error_message(model_class, unique_check)
+
+    def get_absolute_url(self):
+        return reverse('project_app:project_employee_create')
+        
     def __str__(self):
         return str(self.pk)
 

@@ -1,5 +1,9 @@
+{% extends "project_app/project_app_base.html" %}
+{% block content %}
+<div class="py-2"></div>
 <h1>Project Detail</h1>
 {{ project_detail.id }}</br>
 {{ project_detail.name }}</br>
 {{ project_detail.description }}</br>
 {{ project_detail.start_date }}
+{% endblock %}
