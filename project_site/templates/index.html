@@ -1,5 +1,14 @@
 {% extends "base.html" %}
 {% block content %}
 <div class="py-2"></div>
-<h1>Welcome to the Project Management - Home Page</h1>
+<div class="container">
+<div class="jumbotron">
+    <h1 class="display-4">Welcome to Project Management</h1>
+    <p class="lead">This is a small web application for adding project & employees. And assigning multiple employees to a project or multiple projects to an employee.</p>
+    <hr class="my-4">
+    <p>Use the below buttons to quickly create a project or employee.</p>
+    <a class="btn btn-primary btn-lg" href="{% url 'project_app:project_create' %}" role="button">Add Project</a>
+    <a class="btn btn-success btn-lg" href="{% url 'project_app:employee_create' %}" role="button">Add Employee</a>
+  </div>
+</div>
 {% endblock %}
