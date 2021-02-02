@@ -1,11 +1,37 @@
 {% extends "project_app/project_app_base.html" %}
+{% block project_title %} Assignment Delete{% endblock %}
 {% block content %}
-<div class="py-2"></div>
+<!-- <div class="py-2"></div>
   <form method="POST">
       {% csrf_token %}
       <p>Are you sure you want to delete this assignment {{ object }}</p>
       {{ object.id }}, {{ object.project }}, {{ object.employee }}
       <input type="submit" class="btn btn-danger" value="Confirm">
+  </form> -->
+
+  <div class="py-2"></div>
+  <form method="POST">
+    {% csrf_token %}
+    <div class="container">
+      <span class="dpl-newmdb-docs-alert">
+        <p class="note note-danger">
+          Are you sure you want to delete the project assignment of <strong>Employee: {{ object.employee }}</strong> from <strong>Project: {{ object.project }}</strong> ?
+          <br>
+          <br>
+          <span class="btn-group" role="group" aria-label="Assignment Buttons">
+            <a type="button" href="{% url 'project_app:project_employee_create' %}"
+              class="btn btn-dark waves-effect">
+              <i class="fas fa-times fa-md pr-2" aria-hidden="true"></i>
+              Cancel
+            </a>
+            <button type="submit" class="btn btn-danger waves-effect"><i class="fas fa-check fa-md pr-2"
+                aria-hidden="true"></i>
+              Confirm
+            </button>
+          </span>
+        </p>
+      </span>
+    </div>
   </form>
 
 {% endblock %}

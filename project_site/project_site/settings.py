@@ -23,7 +23,7 @@ STATIC_DIR = os.path.join(BASE_DIR,'static')
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '<Add Secret Key>'
+SECRET_KEY = '%)@r#4x-gw%lm5jh&2xflm3emf(#3q8qm#_r&nu80+a83&a1p7'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'project_app.apps.ProjectAppConfig',
-    # 'project_app',
+    'bootstrap_datepicker_plus',
 ]
 
 MIDDLEWARE = [
