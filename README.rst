@@ -16,7 +16,7 @@ Following features are implemented in the application:
 2. RESTful API's implemented by using Django Rest Framework. For an ease the link to the browsable API's are added in the right side of navbar.
 3. Unit Test cases added for (forms, views, urls & models) as a separate module inside the project app.
 
-**Link to User Manual** :download:`pdf <../User_Manual.pdf>`
+Link to User Manual: The user manual file **User_Manual.pdf** is present in the root folder itself for reference.
 
 Getting Started
 ---------------
