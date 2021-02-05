@@ -26,7 +26,7 @@ schema_view = get_schema_view(
 app_name = "api"
 
 urlpatterns = [
-    url(r'drf/', include(router.urls)),
+    url(r'drf/', include(router.urls), name='schema-drf-ui'),
     # url(r'swagger/', schema_view),
     url(r'^swagger(?P<format>\.json|\.yaml)$', schema_view.without_ui(cache_timeout=0), name='schema-json'),
     url(r'^swagger/$', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),

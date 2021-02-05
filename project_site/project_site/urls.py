@@ -21,6 +21,6 @@ urlpatterns = [
     path('', app_views.IndexView.as_view(), name='index'),
     path('app/', include('project_app.urls')),
     # path('drf/', include('rest_framework.urls', namespace='rest_framework')),
-    path('api/', include('project_app.api.urls')),
+    path('api/', include('project_app.api.urls', namespace='api')),
     path('admin/', admin.site.urls),
 ]
